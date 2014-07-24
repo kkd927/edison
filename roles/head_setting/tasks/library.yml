@@ -1,0 +1,34 @@
+---
+
+- name: Copy intel library file
+  copy: src=intel-library.tar.gz dest={{ path }}
+
+- name: Unzip intel library file
+  shell: tar vxzf "{{ path }}/intel-library.tar.gz" -C {{ path }}
+
+- name: Setup library path
+  shell: rm -f /etc/ld.so.conf.d/intel.conf
+
+- name: Create /etc/ld.so.conf.d/intel.conf
+  shell: echo "{{ path }}/intel-library" >> /etc/ld.so.conf.d/intel.conf
+
+- name: Copy intel file
+  copy: src=intel.tar.gz dest={{ path }}
+
+- name: Unzip intel file
+  shell: tar vxzf "{{ path }}/intel.tar.gz" -C /opt
+
+- shell: mkdir -p /opt/mpi/intel
+
+- shell: rm -f /opt/mpi/intel/mpich-1.2.7p1
+
+- name: Copy mpich-1.2.7p1 file
+  copy: src=mpich-1.2.7p1.tar.gz dest={{ path }}
+
+- name: Unzip mpich-1.2.7p1 file
+  shell: tar vzxf "{{ path }}/mpich-1.2.7p1.tar.gz" -C {{ path }}
+
+- shell: ln -sf "{{ path }}/mpich-1.2.7p1" /opt/mpi/intel/mpich-1.2.7p1
+
+- shell: 
+

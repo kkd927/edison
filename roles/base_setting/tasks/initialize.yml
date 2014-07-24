@@ -1,0 +1,72 @@
+---
+
+- name: Install python-simplejson for ansible
+  raw: yum install -y python-simplejson
+
+- name: Synchronize time
+  shell: rdate -s time.bora.net
+
+- name: Download EPEL rpm
+  shell: wget -O "{{ path }}/epel.rpm" http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm
+
+- name: Download Remi rpm
+  shell: wget -O "{{ path }}/remi.rpm" wget http://rpms.famillecollet.com/enterprise/remi-release-5.rpm
+
+- name: Download Rpmforge repo rpm
+  shell: wget -O "{{ path }}/rpmforge.rpm" http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el5.rf.x86_64.rpm
+
+- name: Download Ruby repo rpm
+  shell: wget -O "{{ path }}/ruby.rpm" http://vault.centos.org/5.10/os/SRPMS/ruby-1.8.5-31.el5_9.src.rpm
+
+- name: Install Epel repo
+  shell: rpm -Uvh "{{ path }}/epel.rpm"
+  ignore_errors: true
+
+- name: Install Remi repo
+  shell: rpm -Uvh "{{ path }}/remi.rpm"
+  ignore_errors: true
+
+- name: Install Rpmforge repo
+  shell: rpm -Uvh "{{ path }}/rpmforge.rpm"
+  ignore_errors: true
+
+- name: Install Ruby repo
+  shell: rpm -Uvh "{{ path }}/ruby.rpm"
+  ignore_errors: true
+
+- name: Install development tools
+  yum: name="@Development tools" state=present
+
+- name: Install development libraries
+  yum: name="@Development libraries" state=present
+
+- name: Update default packages
+  shell: yum -y update
+
+- name: Install necessary packages
+  yum: pkg={{ item }} state=latest
+  with_items:
+    - gd
+    - gd-devel
+    - libxml2-devel
+    - openssl-devel*
+    - gcc
+    - gcc-c++
+    - boost-devel
+    - binutils*
+    - mesa-libGLU*
+    - openbabel
+    - openbabel-devel
+    - ghostscript*
+    - ImageMagick*
+    - gv
+    - atlas
+    - blas*
+    - ncurses-devel*
+    - zlib*.x86_64
+    - freeglut*
+    - ffmpeg*
+    - compat-libstdc++*
+    - bzip2
+    - bzip2-devel
+    - bzip2-libs

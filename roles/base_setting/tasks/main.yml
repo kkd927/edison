@@ -1,0 +1,4 @@
+---
+
+- include: initialize.yml
+- include: python2.7.yml

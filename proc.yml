@@ -1,0 +1,17 @@
+---
+
+- name: Set up intial environment
+  hosts: all
+  user: root
+  gather_facts: no
+
+  roles:
+    - base_setting
+
+
+- name: Set up M/W Cluster environment
+  hosts: MiddleWare
+  user: root
+  
+  roles:
+    - mw_setting

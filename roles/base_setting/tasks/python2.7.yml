@@ -1,0 +1,47 @@
+---
+
+- name: Download python 2.7.8
+  shell: wget -O "{{ path }}/Python-2.7.8.tgz" https://www.python.org/ftp/python/2.7.8/Python-2.7.8.tgz --no-check-certificate
+
+- name: Unzip python file
+  shell: tar vxzf "{{ path }}/Python-2.7.8.tgz" -C {{ path }}
+
+- name: Configure for python installation
+  shell: cd "{{ path }}/Python-2.7.8/" && ./configure
+
+- name: Compile python module
+  shell: make -C "{{ path }}/Python-2.7.8/"
+
+- name: Install python 2.7.8
+  shell: make install -C "{{ path }}/Python-2.7.8/"
+
+- name: Download python-setuptools
+  shell: wget -O "{{ path }}/setuptools-0.6c11-py2.7.egg" http://pypi.python.org/packages/2.7/s/setuptools/setuptools-0.6c11-py2.7.egg --no-check-certificate
+
+- name: Install python-setuptools
+  shell: cd {{ path }} && sh setuptools-0.6c11-py2.7.egg
+
+- name: Install pip
+  shell: /usr/local/bin/easy_install pip
+
+- name: Create symlink to updated version
+  shell: ln -sf /usr/local/bin/pip2.7 /usr/bin/pip
+
+- name: Install numpy
+  pip: name=numpy version=1.7.0
+
+- name: Install lapack*
+  yum: name=lapack* state=latest
+
+- name: Install scipy
+  pip: name=scipy
+
+- name: Install necessary packages for matplotlib
+  yum: pkg={{ item }} state=latest
+  with_items:
+    - libpng*
+    - freetype*
+
+- name: Install matplotlib
+  pip: name=matplotlib
+
