@@ -9,8 +9,11 @@
 - name: Setting intel library
   shell: rm -f /etc/ld.so.conf.d/intel.conf
 
-- name: Setting intel.conf file
+- name: Create intel.conf file
   shell: echo "{{ path }}/intel" >> /etc/ld.so.conf.d/intel.conf
+
+- name: Create torque.conf file
+  shell: echo "/usr/local/lib" >> /etc/ld.so.conf.d/torque.conf
 
 - name: Copy intel file
   copy: src=intel.tar.gz dest={{ path }}

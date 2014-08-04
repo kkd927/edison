@@ -1,0 +1,25 @@
+---
+
+- name: Download torque-3.0.5
+  get_url: url="http://wpfilebase.s3.amazonaws.com/torque/snapshots/torque-3.0.5-snap.201203201448.tar.gz?AWSAccessKeyId=AKIAJN2PZU37BETGCSOQ&Expires=1429823823&Signature=WWw28UBfaJeR6tB5Nekcm49htKQ%3D" dest="{{ path }}/torque-3.0.5.tar.gz"
+
+- name: Unzip torque-3.0.5.tar.gz
+  shell: tar vxzf "{{ path }}/torque-3.0.5.tar.gz" -C {{ path }} && mv "{{ path }}/torque-3.0.5-snap.201203201448" "{{ path }}/torque-3.0.5"
+
+- name: Configure torque-3.0.5
+  shell: cd "{{ path }}/torque-3.0.5" && ./configure CC="gcc -m64"
+
+- name: Build and install torque-3.0.5
+  shell: make -C "{{ path }}/torque-3.0.5" && make install -C "{{ path }}/torque-3.0.5"
+
+- name: Setting torque-3.0.5 ..(1)
+  shell: cp -vf "{{ path }}/torque-3.0.5/contrib/init.d/pbs_server" /etc/init.d/
+
+- name: Setting torque-3.0.5 ..(2)
+  shell: chkconfig --level 2345 pbs_server on
+
+- name: Restart torque-3.0.5 service..[OFF]
+  shell: /etc/init.d/pbs_server stop
+
+- name: Restart torque-3.0.5 service..[ON]
+  shell: /etc/init.d/pbs_server start

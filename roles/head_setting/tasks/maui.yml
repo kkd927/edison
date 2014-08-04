@@ -1,0 +1,25 @@
+---
+
+- name: Download maui 3.3.1
+  get_url: url="http://wpfilebase.s3.amazonaws.com/mauischeduler/maui-3.3.1.tar.gz?AWSAccessKeyId=AKIAJN2PZU37BETGCSOQ&Expires=1423008686&Signature=zplyu9BAFRpK%2FZfTq7q0VVrXTxs%3D" dest="{{ path }}/maui-3.3.1.tar.gz"
+
+- name: Unzip maui 3.3.1
+  shell: tar vxzf "{{ path }}/maui-3.3.1.tar.gz" -C {{ path }}
+
+- name: Configure maui 3.3.1
+  shell: cd "{{ path }}/maui-3.3.1" && ./configure --with-pbs=/usr/local
+
+- name: Build and install maui 3.3.1
+  shell: make -C "{{ path }}/maui-3.3.1" && make install -C "{{ path }}/maui-3.3.1"
+
+- name: Modify the maui.d daemon..(1)
+  shell: cp "{{ path }}/maui-3.3.1/etc/maui.d" /etc/init.d/
+
+- name: Modify the maui.d daemon..(2)
+  lineinfile: dest=/etc/init.d/maui.d regexp=^MAUI_PREFIX= line=MAUI_PREFIX=/usr/local/maui
+
+- name: Start maui schedular..(1)
+  shell: killall maui
+
+- anme: Start maui schedular..(2)
+  shell: /usr/local/maui/sbin/maui

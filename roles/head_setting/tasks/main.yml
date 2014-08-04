@@ -2,3 +2,4 @@
 
 - include: intel.yml
 - include: pbs.yml
+- include: maui.yml
