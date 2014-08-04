@@ -1,0 +1,40 @@
+---
+
+- name: Copy intel library file
+  copy: src=intel-library.tar.gz dest={{ path }}
+
+- name: Unzip intel library file
+  shell: tar vxzf "{{ path }}/intel-library.tar.gz" -C {{ path }}
+
+- name: Setting intel library
+  shell: rm -f /etc/ld.so.conf.d/intel.conf
+
+- name: Setting intel.conf file
+  shell: echo "{{ path }}/intel" >> /etc/ld.so.conf.d/intel.conf
+
+- name: Copy intel file
+  copy: src=intel.tar.gz dest={{ path }}
+
+- name: Unzip intel file
+  shell: tar vxzf "{{ path }}/intel.tar.gz" -C /opt
+
+- name: Setting mpich..(1)
+  shell: mkdir -p /opt/mpi/intel
+
+- name: Setting mpich..(2)
+  shell: rm -f /opt/mpi/intel/mpich-1.2.7p1
+
+- name: Copy mpich-1.2.7p1 file
+  copy: src=mpich-1.2.7p1.tar.gz dest={{ path }}
+
+- name: Unzip mpich-1.2.7p1 file
+  shell: tar vzxf "{{ path }}/mpich-1.2.7p1.tar.gz" -C {{ path }}
+
+- name: Setting mpich..(3)
+  shell: ln -sf "{{ path }}/mpich-1.2.7p1" /opt/mpi/intel/mpich-1.2.7p1
+
+- name: Setting SSD..(1)
+  shell: rm -f /ssd
+
+- name: Setting SSD..(2)
+  shell: ln -sf /EDISON/ssd /ssd

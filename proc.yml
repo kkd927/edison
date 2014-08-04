@@ -9,9 +9,9 @@
     - base_setting
 
 
-- name: Set up M/W Cluster environment
-  hosts: MiddleWare
-  user: root
+#- name: Set up M/W Cluster environment
+#  hosts: MiddleWare
+#  user: root
   
-  roles:
-    - mw_setting
+#  roles:
+#    - mw_setting

@@ -1,4 +1,4 @@
 ---
 
-- include: jdk8.yml
+- include: jdk6.yml
 - include: apache_tomcat.yml

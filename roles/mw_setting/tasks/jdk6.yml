@@ -1,0 +1,46 @@
+---
+
+- name: Download Java SE Development Kit 6
+  shell: 'wget http://download.oracle.com/otn-pub/java/jdk/6u45-b06/jdk-6u45-linux-x64.bin -O {{ path }}/jdk-6u45-linux-x64-rpm.bin --no-cookies --no-check-certificate --header Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie'
+
+- name: Change mode JDK 6 file
+  shell: chmod +x "{{ path }}/jdk-6u45-linux-x64-rpm.bin"
+
+- name: Install JDK 6
+  shell: sh "{{ path }}/jdk-6u45-linux-x64-rpm.bin"
+
+- name: Move JDK 6 directory to /usr/java/
+  shell: mv "{{ path }}/jdk1.6.0_45" /usr/java/jdk1.6.0_45/
+
+- name: Configure the OS to use SUN JDK 6 ...(1)
+  shell: alternatives --install /usr/bin/java java /usr/java/jdk1.6.0_45/jre/bin/java 20000
+
+- name:  Configure the OS to use SUN JDK 6 ...(2)
+  shell: alternatives --install /usr/bin/jar jar /usr/java/jdk1.6.0_45/bin/jar 20000
+
+- name:  Configure the OS to use SUN JDK 6 ...(3)
+  shell: alternatives --install /usr/bin/javac javac /usr/java/jdk1.6.0_45/bin/javac 20000
+
+- name:  Configure the OS to use SUN JDK 6 ...(4)
+  shell: alternatives --install /usr/bin/javaws javaws /usr/java/jdk1.6.0_45/jre/bin/javaws 20000
+
+- name:  Configure the OS to use SUN JDK 6 ...(5)
+  shell: alternatives --set java /usr/java/jdk1.6.0_45/jre/bin/java
+
+- name:  Configure the OS to use SUN JDK 6 ...(6)
+  shell: alternatives --set javaws /usr/java/jdk1.6.0_45/jre/bin/javaws
+
+- name:  Configure the OS to use SUN JDK 6 ...(7)
+  shell: alternatives --set javac /usr/java/jdk1.6.0_45/bin/javac
+
+- name:  Configure the OS to use SUN JDK 6 ...(8)
+  shell: alternatives --set jar /usr/java/jdk1.6.0_45/bin/jar
+
+- name: Register JAVA_HOME path
+  shell: echo "export JAVA_HOME=/usr/java/jdk1.8.0_11" >> /root/.bashrc
+
+- name: Register JRE_HOME path
+  shell: echo "export JRE_HOME=/usr/java/jdk1.8.0_11" >> /root/.bashrc
+
+- name: Reload environment variable
+  shell: source /root/.bashrc

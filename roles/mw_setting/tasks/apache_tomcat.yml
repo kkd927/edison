@@ -7,4 +7,4 @@
   shell: tar vzxf "{{ path }}/apache-tomcat-7.0.54.tar.gz"
 
 - name: Install saga-python
-  pip: name=saga-python 
+  pip: name=saga-python version=0.15

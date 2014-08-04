@@ -30,8 +30,11 @@
 - name: Install numpy
   pip: name=numpy version=1.7.0
 
-- name: Install lapack*
-  yum: name=lapack* state=latest
+- name: Install lapack
+  yum: pkg={{ item }} state=latest
+  with_items:
+    - lapack
+    - lapack-devel
 
 - name: Install scipy
   pip: name=scipy
@@ -39,8 +42,11 @@
 - name: Install necessary packages for matplotlib
   yum: pkg={{ item }} state=latest
   with_items:
-    - libpng*
-    - freetype*
+    - libpng
+    - libpng-devel
+    - freetype
+    - freetype-devel
+    - freetype-demos
 
 - name: Install matplotlib
   pip: name=matplotlib

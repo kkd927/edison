@@ -49,24 +49,44 @@
     - gd
     - gd-devel
     - libxml2-devel
-    - openssl-devel*
+    - openssl-devel
     - gcc
     - gcc-c++
     - boost-devel
-    - binutils*
-    - mesa-libGLU*
+    - binutils
+    - binutils-devel
+    - binutils220
+    - mesa-libGLU
+    - mesa-libGLU-devel
     - openbabel
     - openbabel-devel
-    - ghostscript*
-    - ImageMagick*
+    - ghostscript
+    - ghostscript-devel
+    - ghostscript-fonts
+    - ghostscript-gtk
+    - ImageMagick
+    - ImageMagick-c++
+    - ImageMagick-devel
     - gv
     - atlas
-    - blas*
-    - ncurses-devel*
-    - zlib*.x86_64
-    - freeglut*
-    - ffmpeg*
-    - compat-libstdc++*
+    - lapack
+    - lapack-devel
+    - blas
+    - blas-devel
+    - ncurses-devel
+    - zlib
+    - zlib-devel
+    - freeglut
+    - freeglut-devel
+    - ffmpeg
+    - ffmpeg-devel
+    - ffmpeg-libpostproc
+    - compat-libstdc++-33
+    - compat-libstdc++-296
     - bzip2
     - bzip2-devel
     - bzip2-libs
+    - numpy
+    - scipy
+    - python-matplotlib
+    - python-matplotlib-tk
