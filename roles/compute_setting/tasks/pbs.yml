@@ -1,0 +1,13 @@
+---
+
+- name: Install torque-3.0.5
+  shell: make install_mom install_clients -C "{{ path }}/torque-3.0.5"
+
+- name: Setting torque-3.0.5 ..(1)
+  shell: cp -vf "{{ path }}/torque-3.0.5/contrib/init.d/pbs_mom" /etc/init.d/
+
+- name: Setting torque-3.0.5 ..(2)
+  shell: chkconfig --level 2345 pbs_mom on
+
+- name: Restart torque-3.0.5 service
+  shell: /etc/init.d/pbs_server restart

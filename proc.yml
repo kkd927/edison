@@ -17,9 +17,25 @@
     - mw_setting
 
 
+- name: Set up Head & Compute Cluster environment
+  hosts: Head && Compute
+  user: root
+
+  roles:
+    - head&compute
+
+
 - name: Set up Head Cluster environment
   hosts: Head
   user: root
 
   roles:
     - head_setting
+
+
+- name: Set up Compute Cluster environment
+  hosts: Compute
+  user: root
+
+  roles:
+    - compute_setting
