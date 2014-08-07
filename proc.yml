@@ -18,7 +18,7 @@
 
 
 - name: Set up Head & Compute Cluster environment
-  hosts: Head && Compute
+  hosts: Head_Compute
   user: root
 
   roles:

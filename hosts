@@ -1,8 +1,21 @@
 [MiddleWare]
-MW1
+150.183.247.72
+
+[MiddleWare:vars]
+ansible_ssh_port=22002
 
 [Head]
-Head1
+150.183.247.73
+
+[Head:vars]
+ansible_ssh_port=22002
 
 [Compute]
-Compute1
+150.183.247.74
+
+[Compute:vars]
+ansible_ssh_port=22002
+
+[Head_Compute:children]
+Head
+Compute
