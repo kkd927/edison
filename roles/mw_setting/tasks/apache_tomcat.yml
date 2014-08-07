@@ -1,7 +1,7 @@
 ---
 
 - name: Download Tomcat 7
-  shell: wget -O "{{ path }}/apache-tomcat-7.0.54.tar.gz" http://mirror.apache-kr.org/tomcat/tomcat-7/v7.0.54/bin/apache-tomcat-7.0.54.tar.gz
+  get_url: url=http://apache.tt.co.kr/tomcat/tomcat-7/v7.0.55/bin/apache-tomcat-7.0.55.tar.gz dest="{{ path }}/apache-tomcat-7.0.54.tar.gz" 
 
 - name: Unzip Tomcat 7
   shell: tar vzxf "{{ path }}/apache-tomcat-7.0.54.tar.gz"

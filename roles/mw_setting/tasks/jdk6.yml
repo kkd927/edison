@@ -1,16 +1,17 @@
 ---
 
 - name: Download Java SE Development Kit 6
-  shell: 'wget http://download.oracle.com/otn-pub/java/jdk/6u45-b06/jdk-6u45-linux-x64.bin -O {{ path }}/jdk-6u45-linux-x64-rpm.bin --no-cookies --no-check-certificate --header Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie'
+  shell: 'wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/6u45-b06/jdk-6u45-linux-x64.bin" -O "{{ path }}/jdk-6u45-linux-x64-rpm.bin"'
+
 
 - name: Change mode JDK 6 file
   shell: chmod +x "{{ path }}/jdk-6u45-linux-x64-rpm.bin"
 
 - name: Install JDK 6
-  shell: sh "{{ path }}/jdk-6u45-linux-x64-rpm.bin"
+  shell: cd {{ path }} && sh ./jdk-6u45-linux-x64-rpm.bin
 
 - name: Move JDK 6 directory to /usr/java/
-  shell: mv "{{ path }}/jdk1.6.0_45" /usr/java/jdk1.6.0_45/
+  shell: mkdir -p /usr/java/ && mv "{{ path }}/jdk1.6.0_45" /usr/java/
 
 - name: Configure the OS to use SUN JDK 6 ...(1)
   shell: alternatives --install /usr/bin/java java /usr/java/jdk1.6.0_45/jre/bin/java 20000

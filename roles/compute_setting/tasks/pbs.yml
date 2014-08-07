@@ -10,4 +10,4 @@
   shell: chkconfig --level 2345 pbs_mom on
 
 - name: Restart torque-3.0.5 service
-  shell: /etc/init.d/pbs_server restart
+  shell: /etc/init.d/pbs_mom restart
