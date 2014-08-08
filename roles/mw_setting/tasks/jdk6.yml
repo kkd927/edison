@@ -11,7 +11,7 @@
   shell: cd {{ path }} && sh ./jdk-6u45-linux-x64-rpm.bin
 
 - name: Move JDK 6 directory to /usr/java/
-  shell: mkdir -p /usr/java/ && mv "{{ path }}/jdk1.6.0_45" /usr/java/
+  shell: mkdir -p /usr/java/ && mv "{{ path }}/jdk1.6.0_45" /usr/java/ -f
 
 - name: Configure the OS to use SUN JDK 6 ...(1)
   shell: alternatives --install /usr/bin/java java /usr/java/jdk1.6.0_45/jre/bin/java 20000
