@@ -20,7 +20,7 @@
 
 - name: Start maui schedular..(1)
   shell: killall maui
-  ignore_erros: true
+  ignore_errors: true
 
 - name: Start maui schedular..(2)
   shell: /usr/local/maui/sbin/maui
