@@ -4,7 +4,7 @@
   get_url: url="http://wpfilebase.s3.amazonaws.com/torque/snapshots/torque-3.0.5-snap.201203201448.tar.gz?AWSAccessKeyId=AKIAJN2PZU37BETGCSOQ&Expires=1429823823&Signature=WWw28UBfaJeR6tB5Nekcm49htKQ%3D" dest="{{ path }}/torque-3.0.5.tar.gz"
 
 - name: Unzip torque-3.0.5.tar.gz
-  shell: tar vxzf "{{ path }}/torque-3.0.5.tar.gz" -C {{ path }} && mv "{{ path }}/torque-3.0.5-snap.201203201448" "{{ path }}/torque-3.0.5"
+  shell: tar vxzf "{{ path }}/torque-3.0.5.tar.gz" -C {{ path }} && rm -rf "{{ path }}/torque-3.0.5 && mv" "{{ path }}/torque-3.0.5-snap.201203201448" "{{ path }}/torque-3.0.5"
 
 - name: Configure torque-3.0.5
   shell: cd "{{ path }}/torque-3.0.5" && ./configure CC="gcc -m64"

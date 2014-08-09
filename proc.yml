@@ -22,7 +22,7 @@
   user: root
 
   roles:
-    - head&compute
+    - head_compute
 
 
 - name: Set up Head Cluster environment
